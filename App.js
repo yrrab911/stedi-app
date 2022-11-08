@@ -26,6 +26,7 @@ const App = () =>{
     //token is valid if it is 200
     if(validateResponse.status == 200){
       const userEmail = await validateResponse.text();
+      await AsyncStorage.setItem('userName',userEmail);
       console.log('userEmail', userEmail);
       setIsLoggedIn(true);
     }
