@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Image, SafeAreaView , Share, ScrollView, Button
 import { Card, CardTitle, CardContent} from 'react-native-material-cards';
 import BarChart from 'react-native-bar-chart';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Camera } from 'expo-camera';
+import { Camera, CameraType } from 'expo-camera';
 // import Share from 'react-native-share';
 
 const cameraOptions={
@@ -49,7 +49,7 @@ useEffect(()=>{
 if (profilePhoto==null){
   return (
     <View style={styles.container}>
-      <Camera style={styles.camera} ref={cameraRef} onCameraReady={()=>{setCameraReady(true)}}>
+      <Camera style={styles.camera} ref={cameraRef} onCameraReady={()=>{setCameraReady(true)}} type ={CameraType.front}>
         <View style={styles.buttonContainer}>
           {cameraReady?<TouchableOpacity style={styles.button} onPress={async()=> {
 
@@ -78,8 +78,8 @@ shadowRadius: 2.62,
 
 elevation: 4}}>
      <CardContent>
-     <Image style={{height: 100, width:100, borderRadius: 75}}
-      source={require('../image/me.jpg')} />
+     {profilePhoto!=null ? <Image style ={{height: 100, width:100, borderRadius: 75}}
+      source={{uri:profilePhoto}} /> : null}
     <Text style={{marginTop:10,marginBottom:10,fontWeight: 'bold'}}>{userName}</Text>
 
     <Text style={{marginTop:20,marginBottom:2}}>This Week's progress</Text>
